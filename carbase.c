@@ -166,16 +166,16 @@ void modify_car(Tab_of_Cars* tab, int indeks) {
         if (scanf("%d", &choice_of_modification)==1) {
             switch (choice_of_modification) {
                 case 1:
-                    char new_mark[30];
+                    char new_mark[31];
                     printf("Podaj nowa marke pojazdu:");
-                    scanf("%29s",new_mark);
-                    strncpy(tab->car[indeks].marka, new_mark, 30);
+                    scanf("%30s",new_mark);
+                    strncpy(tab->car[indeks].marka, new_mark, 31);
                     break;
                 case 2:
-                    char new_model[30];
+                    char new_model[21];
                     printf("Podaj nowy model:");
-                    scanf("%29s",new_model);
-                    strncpy(tab->car[indeks].model, new_model, 20);
+                    scanf("%20s",new_model);
+                    strncpy(tab->car[indeks].model, new_model, 21);
                     break;
                 case 3:
                     int new_year;
@@ -238,8 +238,9 @@ void modify_car(Tab_of_Cars* tab, int indeks) {
 void filter_options(Tab_of_Cars* tab) {
     int option_of_filter;
     int empty=0;
-    printf("Wyszukaj za pomoca:\n");
-    printf("1 - marka\t2 - model\t3 - rok produkcji\t4 - przebieg\t5 - rodzaj paliwa");
+    printf("Wyszukaj za pomoca\n");
+    printf("1 - marka\t2 - model\t3 - rok produkcji\t4 - przebieg\t5 - rodzaj paliwa\n");
+    printf("Wybor: ");
     if (scanf("%d", &option_of_filter)==1) {
         switch (option_of_filter) {
             case 1:
@@ -253,8 +254,6 @@ void filter_options(Tab_of_Cars* tab) {
                     }
                 }if(empty==0) {
                     printf("Brak w bazie marki: %s\n",search_by_mark);
-                }else {
-                    empty=0;
                 }
                 break;
             case 2:
@@ -268,8 +267,6 @@ void filter_options(Tab_of_Cars* tab) {
                     }
                 }if(empty==0) {
                     printf("Brak tego modelu w bazie: %s\n",search_by_model);
-                }else{
-                    empty=0;
                 }
                 break;
             case 3:
@@ -283,8 +280,6 @@ void filter_options(Tab_of_Cars* tab) {
                     }
                 }if(empty==0) {
                     printf("Brak rocznika %d w bazie.\n",search_by_year);
-                }else{
-                    empty=0;
                 }
                 break;
             case 4:
@@ -315,8 +310,6 @@ void filter_options(Tab_of_Cars* tab) {
                     }
                 }if(empty==0) {
                     printf("Brak samochodu z przedzialu przebiegu: %ld %c %ld w bazie.\n",min_przebieg,41,max_przebieg);
-                }else{
-                    empty=0;
                 }
                 break;
             case 5:
@@ -330,8 +323,6 @@ void filter_options(Tab_of_Cars* tab) {
                     }
                 }if(empty==0) {
                     printf("Brak samochodu z tym rodzajem paliwa: %s\n",search_by_petrol);
-                }else{
-                    empty=0;
                 }
                 break;
         }
