@@ -8,6 +8,7 @@ int main() {
     Tab_of_Cars tab;
     make_cars_table(&tab);
     int option;
+    int reset;
     printf("Witaj w bazie naszego komisu!\n");
     do
         {
@@ -90,17 +91,19 @@ int main() {
                 break;
             case 7:
                 char read_filename[30];
+                reset = 0;
                 printf("Podaj nazwe pliku do odczytu:");
                 scanf("%s", read_filename);
-                read_from_file(&tab,read_filename);
+                read_from_file(&tab,read_filename,reset);
                 break;
             case 8:
                 char read2_filename[30];
+                reset = 1;
                 printf("Podaj nazwe pliku do odczytu:");
                 scanf("%s", read2_filename);
                 clear_memory(&tab);
                 make_cars_table(&tab);
-                reset_from_file(&tab,read2_filename);
+                read_from_file(&tab,read2_filename,reset);
                 break;
             case 0:
                 clear_memory(&tab);

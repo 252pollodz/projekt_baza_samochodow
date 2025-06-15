@@ -26,7 +26,6 @@ void clear_memory(Tab_of_Cars* tab);
 int empty_check(const Tab_of_Cars* tab);
 void filter_options(Tab_of_Cars* tab);
 void save_cars_to_file(Tab_of_Cars* tab, const char* filename);
-void read_from_file(Tab_of_Cars* tab, const char* filename);
-void reset_from_file(Tab_of_Cars* tab, const char* filename);
+void read_from_file(Tab_of_Cars* tab, const char* filename, int reset);
 
 #endif //CARBASE_H

@@ -339,11 +339,14 @@ void save_cars_to_file(Tab_of_Cars* tab, const char* filename) {
     }fclose(file);
     printf("Dane zostaly zapisane to do pliku \"%s\".txt\n",filename);
 }
-void read_from_file(Tab_of_Cars* tab, const char* filename) {
+void read_from_file(Tab_of_Cars* tab, const char* filename, int reset) {
     FILE* file = fopen(filename,"r");
     if (file == NULL) {
         printf("Nie mozna otworzyc pliku o nazwie: %s!\n",filename);
         return;
+    }
+    if (reset) {
+        clear_memory(tab);
     }
     char marka[31],model[21],petrol_type[9];
     int year_of_production,przebieg;
@@ -363,32 +366,7 @@ void read_from_file(Tab_of_Cars* tab, const char* filename) {
     fclose(file);
     printf("Dane z pliku %s zostaly wczytane pomyslnie\n",filename);
 }
-void reset_from_file(Tab_of_Cars* tab, const char* filename) {
-    FILE* file = fopen(filename,"r");
-    if (file == NULL) {
-        printf("Nie mozna otworzyc pliku o nazwie: %s!\n",filename);
-        return;
-    }
-    char marka[31],model[21],petrol_type[9];
-    int year_of_production,przebieg;
-    tab->index_car=0;
-    while (fscanf(file,"%30[^;];%20[^;];%d;%ld;%8[^\n]\n",marka,model,&year_of_production,&przebieg,petrol_type)==5){
-        tab->car=realloc(tab->car, sizeof(car_info) * (1 + tab->index_car));
-        if (tab->car==NULL) {
-            printf("Blad alokacji pamieci!\n");
-            exit(EXIT_FAILURE);
-        }
 
-        strncpy(tab->car[tab->index_car].marka,marka,31);
-        strncpy(tab->car[tab->index_car].model,model,21);
-        tab->car[tab->index_car].year_of_production=year_of_production;
-        tab->car[tab->index_car].przebieg=przebieg;
-        strncpy(tab->car[tab->index_car].petrol_type,petrol_type,9);
-        tab->index_car++;
-    }
-    fclose(file);
-    printf("Dane z pliku %s zostaly wczytane pomyslnie\n",filename);
-}
 void clear_memory(Tab_of_Cars* tab) {
     free(tab->car);
     tab->car = NULL;
